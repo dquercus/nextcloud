@@ -27,10 +27,13 @@ services:
     image: nextcloud:stable-fpm
     container_name: nextcloud
     volumes:
-      - nextcloud_data:/var/www/html
+      - nextcloud:/var/www/html
+      - nextcloud_data:/var/www/html/data      
     env_file:
       - stack.env      
     environment:
+      - PUID=1000
+      - PGID=1000
       - POSTGRES_HOST=db
       - REDIS_HOST=redis
     restart: unless-stopped
@@ -42,4 +45,5 @@ volumes:
   npm_data:
   npm_certs:
   db:
+  nextcloud:
   nextcloud_data:
