@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
   nextcloud:
     image: nextcloud:stable-fpm
-    container_name: nextcloud-app
+    container_name: nextcloud
     volumes:
       - nextcloud_data:/var/www/html
     env_file:
