@@ -17,11 +17,6 @@ services:
       - db:/var/lib/postgresql/data
     env_file:
       - stack.env
-    healthcheck:
-      test: [“CMD-SHELL”, “pg_isready”]
-        interval    : 1s
-      timeout: 5s
-        retries: 10      
 volumes:
   npm_data:
   npm_certs:
