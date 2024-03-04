@@ -21,9 +21,25 @@ services:
       - stack.env
   redis:
     image: redis:alpine
-    container_name: redis-dbcache
+    container_name: redis
     restart: unless-stopped
+  nextcloud:
+    image: nextcloud:stable-fpm
+    container_name: nextcloud-app
+    volumes:
+      - nextcloud_data:/var/www/html
+    env_file:
+      - stack.env      
+    environment:
+      - POSTGRES_HOST=db
+      - REDIS_HOST=redis
+    restart: unless-stopped
+    depends_on:
+      - npm
+      - db
+      - redis    
 volumes:
   npm_data:
   npm_certs:
   db:
+  nextcloud_data:
