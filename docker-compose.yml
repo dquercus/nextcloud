@@ -32,6 +32,8 @@ services:
     env_file:
       - stack.env      
     environment:
+      - APACHE_DISABLE_REWRITE_IP=1 # Behind proxy
+      - TRUSTED_PROXIES=npm
       - PUID=1000
       - PGID=1000
       - POSTGRES_HOST=db
