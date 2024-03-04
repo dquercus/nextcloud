@@ -2,6 +2,7 @@ version: '3.8'
 services:
   npm:
     image: 'jc21/nginx-proxy-manager:latest'
+    container_name: npm
     restart: unless-stopped
     ports:
       - '80:80' # Public HTTP Port
@@ -13,10 +14,15 @@ services:
   db:
     image: postgres
     restart: always
+    container_name: db
     volumes:
       - db:/var/lib/postgresql/data
     env_file:
       - stack.env
+  redis:
+    image: redis:alpine
+    container_name: redis-dbcache
+    restart: unless-stopped
 volumes:
   npm_data:
   npm_certs:
