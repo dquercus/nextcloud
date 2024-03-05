@@ -11,6 +11,7 @@ services:
     volumes:
       - npm_data:/data
       - npm_certs:/etc/letsencrypt
+      - /var/log/nginx:/config/log/nginx
   db:
     image: postgres
     restart: always
