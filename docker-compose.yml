@@ -27,8 +27,8 @@ services:
     image: nextcloud:stable
     container_name: nextcloud
     volumes:
-      - nextcloud:/var/www/html
-      - nextcloud_data:/var/www/html/data      
+      - nextcloud:/var/www/html:z
+      - nextcloud_data:/var/www/html/data:z
     env_file:
       - stack.env      
     environment:
@@ -42,7 +42,18 @@ services:
     depends_on:
       - npm
       - db
-      - redis    
+      - redis
+  cron:
+    image: nextcloud:apache
+    restart: unless-stopped
+    container_name: cron
+    volumes:
+      - nextcloud:/var/www/html:z
+      - nextcloud_data:/var/www/html/data:z
+    entrypoint: /cron.sh
+    depends_on:
+      - db
+      - redis      
 volumes:
   npm_data:
   npm_certs:
