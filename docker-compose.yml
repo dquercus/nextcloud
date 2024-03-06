@@ -54,7 +54,12 @@ services:
     entrypoint: /cron.sh
     depends_on:
       - db
-      - redis      
+      - redis
+  promtail:
+    image: grafana/promtail:2.9.4
+    volumes:
+      - /var/log/nginx/:/var/log/nginx/
+    command: -config.file=/etc/promtail/config.yml
 volumes:
   npm_data:
   npm_certs:
