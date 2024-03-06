@@ -55,13 +55,6 @@ services:
     depends_on:
       - db
       - redis
-  promtail:
-    container_name: promtail
-    image: grafana/promtail:2.9.4
-    volumes:
-      - /var/log/nginx/:/var/log/nginx/
-      - /etc/promtail/:/etc/promtail/:ro
-    command: -config.file=/etc/promtail/config.yml
 volumes:
   npm_data:
   npm_certs:
