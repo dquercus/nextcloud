@@ -56,9 +56,11 @@ services:
       - db
       - redis
   promtail:
+    container_name: promtail
     image: grafana/promtail:2.9.4
     volumes:
       - /var/log/nginx/:/var/log/nginx/
+      - /etc/promtail/config.yml:/etc/promtail/config.yml:ro
     command: -config.file=/etc/promtail/config.yml
 volumes:
   npm_data:
